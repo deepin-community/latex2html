@@ -6,15 +6,15 @@
 
 package polski;
 
-sub main'polski_translation { @_[0] }
+sub main::polski_translation { @_[0] }
 
 sub get_polski_specials {
     local($char) = @_;
-    if($char=~/[ae]/i) {&main'iso_map($char,'ogon')}
-    elsif($char=~/[lL]/) {&main'iso_map($char,'strok')}
-    elsif($char=~/x/) {&main'iso_map('z','dot')}
-    elsif($char=~/X/) {&main'iso_map('Z','dot')}
-    elsif($char=~/[cnosz]/i) {&main'iso_map($char,'acute')}
+    if($char=~/[ae]/i) {&main::iso_map($char,'ogon')}
+    elsif($char=~/[lL]/) {&main::iso_map($char,'strok')}
+    elsif($char=~/x/) {&main::iso_map('z','dot')}
+    elsif($char=~/X/) {&main::iso_map('Z','dot')}
+    elsif($char=~/[cnosz]/i) {&main::iso_map($char,'acute')}
     else{$polski_specials{$char}}
 }
 
@@ -96,7 +96,7 @@ sub do_cmd_Slash { '/'.$_[0] }
 sub do_cmd_PLSlash {
     local($_) = @_;
     s/^\s*('|`|;SPMlt;|;SPMgt;|\\|-|\/|=|\||[aelxcnoszAELXCNOSZ])/
-	&get_polski_specials($1)/eos;
+	&polski::get_polski_specials($1)/eos;
     $_;
 }
 
@@ -104,7 +104,7 @@ sub do_cmd_PLSlash {
 sub polski_prefix_translation {
     local($_) = @_;
     s/(^|\G|[^\\<]|[^\\](\\\\)+)\/\s*('|`|;SPMlt;|;SPMgt;|\\|-|\/|=|\||[aelxcnoszAELXCNOSZ])/
-	$1.&polski'get_polski_specials($3)/geom;
+	$1.&polski::get_polski_specials($3)/geom;
     $_;
 }
 

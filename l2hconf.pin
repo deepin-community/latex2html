@@ -30,6 +30,7 @@ $PDFTOCAIRO = '@PDFTOCAIRO@';	# pdf to svg converter
 $PS2PDF = '@PS2PDF@';	# ps to pdf converter
 $PDFCROP = '@PDFCROP@';	# pdfcrop
 $GS = '@GS@';	# GhostScript
+$SRCHILITE = '@SRCHILITE@';	# pygmentize or source-highlight
 
 #if @PDFLATEX@
 $USE_PDFTEX = 1;	# use pdflatex unless -nouse_pdftex on command line
@@ -997,6 +998,15 @@ $TITLES_LANGUAGE = "english";
 #	or when you specify the language through the babel package.
 
 
+# When the -long_titles option is used, duplication of generated filenames
+# which differ only in letter case is checked as follows:
+# $UNICASE_TITLES = 0: such filenames are treated as unique
+#		       (for case sensitive filesystems typical under Unix)
+# $UNICASE_TITLES = 1: such filenames are treated as duplicated
+#		       (for case insensitive filesystems such as NTFS or FAT)
+$UNICASE_TITLES = 0;
+
+
 ### Verbosity #################################################################
 #
 # -verbosity
@@ -1108,18 +1118,16 @@ sub bot_navigation_panel {
 ### Meta Information #####################################################
 # 
 # This information will be inserted in the HEAD of the generated
-# HTML file. It can be used by automatic indexing scripts (eg
-# site-index.pl at http://www.ai.mit.edu/tools/site-index.html) 
-# You can change the description, keywords, etc. values.
+# HTML file.
+# You can set the description, keywords, etc. values.
 #
 sub meta_information {
     local($_) = @_;
     # Cannot have nested HTML tags...
     do { s/<[^>]*>//g;
-	"<META NAME=\"description\" CONTENT=\"$_\">\n" .
-	"<META NAME=\"keywords\" CONTENT=\"$FILE\">\n" .
-	"<META NAME=\"resource-type\" CONTENT=\"document\">\n" .
-	"<META NAME=\"distribution\" CONTENT=\"global\">\n"
+	# "<META NAME=\"description\" CONTENT=\"$_\">\n" .
+	# "<META NAME=\"keywords\" CONTENT=\"$FILE\">\n" .
+	""
     } if $_;
 }
 

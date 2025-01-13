@@ -14,7 +14,7 @@ Forwarded: not-needed
    #'texlive.pm'        => 'lib',
    'versions'          => 'lib,recurse',
    #'wrapper'           => 'lib,recurse',
-@@ -389,7 +389,7 @@
+@@ -391,7 +391,7 @@
          }
        }
        closedir(DIR);

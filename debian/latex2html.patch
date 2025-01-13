@@ -18,7 +18,7 @@ NMUed, "joey" or the like).
 	 I'll tell you all about this MUD thing at the barbeque on Friday!"
 
 Next, the attacker has to set up
-Projets/debian/latex2html-2000-beta1/texexpand, which is the program
+Projects/debian/latex2html-2000-beta1/texexpand, which is the program
 that will be executed by perl, and some of the other files referred to
 around line 429 of /usr/bin/latex2html. The dummy texexpand can do
 something like set up a suid shell for him to use later. Then it can go

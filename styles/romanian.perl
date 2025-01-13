@@ -8,7 +8,7 @@ package romanian;
 
 print " [romanian]";
 
-sub main'romanian_translation { @_[0] }
+sub main::romanian_translation { @_[0] }
 
 
 
@@ -73,7 +73,7 @@ sub romanian_today {
 &romanian_titles;
 $default_language = 'romanian';
 $TITLES_LANGUAGE = 'romanian';
-$romanian_encoding = 'is-8859-16';
+$romanian_encoding = 'iso-8859-16';
 
 # $Log: romanian.perl,v $
 # Revision 1.1  1998/08/25 01:59:07  RRM

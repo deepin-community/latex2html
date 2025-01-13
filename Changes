@@ -112,6 +112,65 @@
 # A more detailed log history can be found within the particular files, near
 # the top.
 #
+#
+#--------- v2025
+#
+#		- generate a numeric char reference for chars not found in
+#		  the output character encoding.
+#		- fix \'{\i}
+#		- switch --entities no longer makes accents like &iacute;
+#		- fix \verb&A&
+#		- avoid processing eqnarray* as one image,
+#                 make layout consistent with eqnarray
+#
+#--------- v2024.2
+#
+#		- fix pstoimg operator precedence bug
+#		  https://bugs.debian.org/1085309
+#		- allow "-dir ." and "-rootdir ."
+#		- remove extra "showpage" from pstoimg
+#		  https://bugs.debian.org/1078536
+#		- remove svg from config for pstoimg
+#		  https://bugs.debian.org/1078535
+#		- new option -use_hilite
+#		- support minted package
+#		- new option -unicase_titles
+#
+#--------- v2024
+#
+#		- "make clean" removes manual.pdf
+#		  https://bugs.debian.org/1046413
+#
+#--------- v2023.2
+#
+#		- DONT_INCLUDE now affects \usepackage but not \input
+#		- support \usepackage[xindy]{imakeidx} for sorting accents
+#		- support babel main language option
+#		- support hyphenat package
+#
+#--------- v2023
+#
+#		- update for latest pdftocairo
+#
+#--------- v2022.2
+#
+#		- spacing of eqnarray and align
+#		- check for preview.sty in config.pl
+#		- check for failure of pdflatex run
+#		- newline after footnote should give space
+#		- fix ref to label inside float
+#		- add sidewaysfigure, sidewaystable
+#		- fix eqnarray*
+#
+#--------- v2022
+#
+#		- fix cropped figures
+#		- revert PreviewBorder to 0.5bp
+#		- support download attribute for <A> tag
+#		- remove meta tags for distribution, etc
+#		- allow input filename with no extension
+#		  echo hello world | latex2html -dir out -mkdir /dev/stdin
+#
 #--------- v2021.2
 #
 #		- latex2html -long_titles   fix duplicate file names

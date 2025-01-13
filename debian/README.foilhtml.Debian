@@ -7,7 +7,7 @@ well-tested, and I may certainly missing some evil side-effects of
 my changes.
 
 Except for some obligatory cosmetic nonsense you don't want to use,
-this essentially replaces all occurences of rotatedfoilhead{} in the
+this essentially replaces all occurrences of rotatedfoilhead{} in the
 various sectioning macros by foilhead{} - foilhead{} as defined in
 the standard FoilTeX package already knows about landscape mode and
 does the right thing.

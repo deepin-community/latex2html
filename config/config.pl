@@ -156,7 +156,7 @@
 #  --  this version should be "thread-safe" now
 #  	--- there are no more *-globs . References are used throughout.
 #  --  UTF8 implemented completely, as an output encoding
-#  --  use of full entitity names is implemented as an output encoding
+#  --  use of full entity names is implemented as an output encoding
 #  --  mechanism available to choose whether to allow 8-bit chars in the
 #  	output, or UTF8 or entity names or images
 #  --  implemented post-processing search for ,, << >> ligatures
@@ -247,7 +247,7 @@
 # Revision 1.6  1999/06/03 12:15:49  MRO
 #
 #
-# - cleaned up the TMP / TMPDIR / TMP_ mechansim. Should work much the
+# - cleaned up the TMP / TMPDIR / TMP_ mechanism. Should work much the
 #   same now, but the code should be easier to understand.
 #
 # - cleaned up L2hos, added an INSTALLation FAQ, beautified the test
@@ -441,8 +441,8 @@ use L2hos;
 use vars qw(%prefs %cfg %newcfg);
 
 # This is the central place to modify the release name and date!!!
-my $RELEASE = '2021.2';
-my $VERSION = 'Released July 1, 2021';
+my $RELEASE = '2025';
+my $VERSION = 'Released January 1, 2025';
 
 # --------------------------------------------------------------------------
 # Open log
@@ -896,6 +896,16 @@ if($kpsewhich) {
     &result("no, from which planet is your kpsewhich?");
     $newcfg{'KPSEWHICH'} = '';
   }
+}
+
+if ($kpsewhich) {
+    &checking('for preview.sty');
+    my ($stat,$out,$err) = &get_out_err("$kpsewhich preview.sty");
+    if($stat == 0) { # ok
+	&result("ok");
+    } else {
+	&logit("NONE\nWarning: preview.sty not found.\n         svg images will not work.\n         dvipng will not work\n");
+    }
 }
 
 &checking('for TeX include path');
@@ -1606,20 +1616,25 @@ if(1) {
 }
 
 
-$newcfg{'IMAGE_TYPES'} = '';
+$newcfg{'IMAGE_TYPES'} = '';	# types for latex2html, subset of svg, png, gif
+$newcfg{'PSTOIMG_TYPES'} = '';	# types for pstoimg, subset of png, gif
 
 if($newcfg{'have_pstoimg'}) {
   my @imgtypes = ();
+  my @pstoimgtypes = ();
   if($opt{'SVG'}) {
     push(@imgtypes,'svg');
   }
   if($opt{'PNG'}) {
     push(@imgtypes,'png');
+    push(@pstoimgtypes,'png');
   }
   if($opt{'GIF'}) {
     push(@imgtypes,'gif');
+    push(@pstoimgtypes,'gif');
   }
   $newcfg{'IMAGE_TYPES'} = join(' ',@imgtypes);
+  $newcfg{'PSTOIMG_TYPES'} = join(' ',@pstoimgtypes);
 }
 
 # --------------------------------------------------------------------------
@@ -1873,6 +1888,34 @@ if($newcfg{'have_pstoimg'} && $opt{'GIF'} && !$newcfg{'gif_trans'}) {
   if($giftrans) {
     $newcfg{'GIFTRANS'} = $giftrans;
     $newcfg{'gif_trans'} = 'giftrans';
+  }
+}
+
+# --------------------------------------------------------------------------
+# SRCHILITE
+# --------------------------------------------------------------------------
+# used in listings.perl and minted.perl for colorized listings
+
+$newcfg{'SRCHILITE'} = '';
+
+if(1) {
+  my $srchilite = &find_prog(&get_name('SRCHILITE',1));
+  if($srchilite) {
+    $newcfg{'SRCHILITE'} = $srchilite;
+  }
+}
+
+# --------------------------------------------------------------------------
+# SRCHILITE
+# --------------------------------------------------------------------------
+# used in listings.perl and minted.perl for colorized listings
+
+$newcfg{'SRCHILITE'} = '';
+
+if(1) {
+  my $srchilite = &find_prog(&get_name('SRCHILITE',1));
+  if($srchilite) {
+    $newcfg{'SRCHILITE'} = $srchilite;
   }
 }
 
