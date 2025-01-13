@@ -1,3 +1,82 @@
+latex2html (2025+debian1-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Carsten Leonhardt <leo@debian.org>  Wed, 01 Jan 2025 12:59:41 +0100
+
+latex2html (2024.2-debian1-1) unstable; urgency=medium
+
+  * New upstream release. (Closes: #1085309)
+  * Remove backported patches.
+
+ -- Carsten Leonhardt <leo@debian.org>  Mon, 21 Oct 2024 10:53:57 +0200
+
+latex2html (2024-debian1-4) unstable; urgency=medium
+
+  * Backport fix to allow "-dir ." and "-rootdir ."
+    and add autopkgtest for it.
+
+ -- Carsten Leonhardt <leo@debian.org>  Tue, 17 Sep 2024 12:23:55 +0200
+
+latex2html (2024-debian1-3) unstable; urgency=medium
+
+  * Backport fix to remove svg from config for pstoimg from
+    upstream. (Closes: #1078535)
+  * Backport from upstream: remove extra "showpage" from pstoimg.
+    (Closes: #1078536)
+  * Add autopkgtest for pstoimg.
+  * debian/control: Standards-Version: 4.7.0
+  * A bug reported to Ubuntu about \color entries was already fixed in
+    2018.2-debian1-1 (LP: #1798041)
+
+ -- Carsten Leonhardt <leo@debian.org>  Fri, 06 Sep 2024 11:08:01 +0200
+
+latex2html (2024-debian1-2) unstable; urgency=medium
+
+  * Change the binary package dependency to ghostscript instead of
+    ghostscript-x too.
+
+ -- Carsten Leonhardt <leo@debian.org>  Tue, 09 Jan 2024 00:29:52 +0100
+
+latex2html (2024-debian1-1) unstable; urgency=medium
+
+  * New upstream release. (Closes: #1046413)
+  * Depend on ghostscript instead of ghostscript-x which is now a
+    transitional package. (Closes: #1033772)
+
+ -- Carsten Leonhardt <leo@debian.org>  Tue, 02 Jan 2024 20:18:34 +0100
+
+latex2html (2023-debian1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Depend on texlive-binaries instead of texlive-base-bin. Thanks to
+    Hilmar Preusse. (Closes: #1030065)
+  * debian/control: Standards-Version: 4.6.2
+
+ -- Carsten Leonhardt <leo@debian.org>  Mon, 06 Feb 2023 12:08:48 +0100
+
+latex2html (2022.2-debian1-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Carsten Leonhardt <leo@debian.org>  Wed, 27 Jul 2022 12:00:44 +0200
+
+latex2html (2022-debian1-2) unstable; urgency=medium
+
+  [ Helmut Grohne ]
+  * Mark latex2html Multi-Arch: foreign. (Closes: #1010315)
+
+  [ Carsten Leonhardt ]
+  * debian/control: Standards-Version: 4.6.1
+
+ -- Carsten Leonhardt <leo@debian.org>  Tue, 31 May 2022 00:37:43 +0200
+
+latex2html (2022-debian1-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Carsten Leonhardt <leo@debian.org>  Fri, 11 Mar 2022 14:08:12 +0100
+
 latex2html (2021.2-debian1-1) unstable; urgency=medium
 
   [ Carsten Leonhardt ]
@@ -460,7 +539,7 @@ latex2html (2000-beta1-4) unstable; urgency=low
 
   * Fix romanian language styles. Thank Ionel. (closes: #119530)
   * Fix typo in graphicx.perl. Thank Rainer. (closes: #115977)
-  * Use DVIPS_SAFE=1 for latex2html. I beleive the current version
+  * Use DVIPS_SAFE=1 for latex2html. I believe the current version
     of dvips (tetexbin 1.0.7+20001218-7) in debian sid is working fine.
     (closes: #118095, #114807)
   * Downgrade perl-doc to Suggests. (closes: #112346)
@@ -476,7 +555,7 @@ latex2html (2000-beta1-3.1) unstable; urgency=low
   * Downgrade perl-doc from Depends to Recommends. (closes: #110518)
     You only need this package when calling latex2html with --help.
   * Remove pnmtopng from Build-Depends and Depends lists. It is provided
-    by netpbm which exists in boths lists.
+    by netpbm which exists in both lists.
 
  -- Chanop Silpa-Anan <chanop@debian.org>  Wed, 29 Aug 2001 22:19:10 +1000
 
@@ -585,7 +664,7 @@ latex2html (99.1-pre2-b6-6) frozen unstable; urgency=low
 latex2html (99.1-pre2-b6-5) frozen unstable; urgency=low
 
   * The postinst was vulnerable to being affected by symlinks (if, for
-    some reason, the prerm failed). This has happended for latex2html; and
+    some reason, the prerm failed). This has happened for latex2html; and
     created a grave bug.
   * There was a bug in the postinst in a case statement, that caused
     installation to fail for certain situations.
@@ -681,7 +760,7 @@ latex2html (98.1-pre2-b8-2) unstable; urgency=low
 latex2html (98.1-pre2-b8-1) unstable; urgency=low
 
   * More upstream bug fixes,
-  * Ensure that the icons are avalable, even when looking under icons.png
+  * Ensure that the icons are available, even when looking under icons.png
 
  -- Manoj Srivastava <srivasta@debian.org>  Wed, 27 Jan 1999 01:21:19 -0600
 
@@ -730,7 +809,7 @@ latex2html (98.1p1-4) frozen unstable; urgency=low
   * Tried to make sure that the LaTeX2HTML manual is really built correctly.
   * There was an old version of html.sty in the docs directory gumming up
     the works
-  * Added a symlink from Chnages.gz to changelog.gz, satisfies lintian.
+  * Added a symlink from Changes.gz to changelog.gz, satisfies lintian.
   * Added a crude hack to enable LaTeX2HTML from hanging while converting
     problems.tex in the manual (this is a major problem with the package
     that has been reported upstream). I think it is important to get this
@@ -755,7 +834,7 @@ latex2html (98.1p1-2) frozen unstable; urgency=low
     need to be respected.
   * Upgraded to Standards Version 2.4.0.0 (no additional changes)
   * Do not generate a ps file, since the resolution of the printer is
-    unknown. Leave the dvi file in so that peopel may generate the ps file
+    unknown. Leave the dvi file in so that people may generate the ps file
     at will.
   * closes: Bug#20005
 
@@ -777,7 +856,7 @@ latex2html (98.1-2) unstable; urgency=low
 latex2html (98.1-1) unstable; urgency=low
 
   * The beta versions were never released. This is the new upstream
-    release, but there were enoufh source changes to restart a new CVS
+    release, but there were enough source changes to restart a new CVS
     tree.
   * much faster, and generates much better output.
   * This parses everything I could throw at it (a few glitches exist, but
@@ -832,10 +911,10 @@ latex2html (96.1.h-6) unstable; urgency=low
     environments.
   * Install the LaTeX styles files in the proper location in the TDS
     (namely /usr/lib/texmf/tex/latex/latex2html).
-  * Added commads to postinst and postrm to run texhash if appropiate.
+  * Added commands to postinst and postrm to run texhash if appropriate.
   * This fixes BUG#9918.
   * This is the first version to be constructed with cvs-buildpackage, in
-    fact, we are really useing the pre-release version.
+    fact, we are really using the pre-release version.
 
  -- Manoj Srivastava <srivasta@debian.org>  Wed, 28 May 1997 22:26:15 -0500
 
@@ -855,10 +934,10 @@ latex2html (96.1.h-4) unstable; urgency=low
   * Changed HTML_VERSION in latex2html.config to 3.1 to support HTML tables
     and Font size changes by default.
   * Added symlinks to icons under /var/www so that the files converted by
-    LaTeX2HTML can be viewd directly using a HTML browser, or put in a
+    LaTeX2HTML can be viewed directly using a HTML browser, or put in a
     directory visible from the local HTTP server and viewd through the HTTP
     server. The solution is ugly, but it works, and should fix BUG#8536
-  * Changed maintaner name in control file as well
+  * Changed maintainer name in control file as well
 
  -- Manoj Srivastava <srivasta@debian.org>  Thu, 1 May 1997 14:00:13 -0500
 
@@ -872,7 +951,7 @@ latex2html (96.1.h-3) frozen unstable; urgency=low
   * Expanded README to insert a table to help decide icon server values
   * The install test now edits the executable after asking the user, unless
     the force option has been used.
-  * The install test now edits the executable script only when necesary
+  * The install test now edits the executable script only when necessary
   * install-test now works for Debian.
   * New maintainer
 

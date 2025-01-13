@@ -199,13 +199,14 @@ $__ONCLICK_rx = $__ONDBLCLICK_rx = $__ONMOUSEUP_rx = $__ONMOUSEDOWN_rx = $__ONMO
 $A_attribs = ",SHAPE,DIR,";
 $A__SHAPE = $shape_type;
 $A__DIR = $dir_type;
-$A_attribs_rx_list = join('',",HREF,NAME,REL,REV,CHARSET,TARGET,ACCESSKEY,COORDS,TABINDEX,ONFOCUS,ONBLUR",$style_attribs);
+$A_attribs_rx_list = join('',",HREF,NAME,REL,DOWNLOAD,TARGET,ACCESSKEY,COORDS,TABINDEX,ONFOCUS,ONBLUR",$style_attribs);
 $A__HREF_rx = $URL_type;
 $A__NAME_rx = $A__REL_rx = $A__REV_rx = $string_type;
 $A__CHARSET_rx = $A__TARGET_rx = $A__ACCESSKEY_rx = $CDATA_type;
 $A__COORDS_rx = $coord_type;
 $A__TABINDEX_rx = $num_type;
 $A__ONFOCUS_rx = $A__ONBLUR_rx = $script_type;
+$A__DOWNLOAD_rx = $URL_type; # does not support DOWNLOAD attr with no value
 
 $ACRONYM_attribs = ",DIR,";
 $ACRONYM__DIR = $dir_type;
@@ -1466,11 +1467,9 @@ sub do_env_eqnarray {
     local($sbig,$ebig,$falign) = ('','','CENTER');
     ($sbig,$ebig) = ('<BIG>','</BIG>')
 	if (($DISP_SCALE_FACTOR)&&($DISP_SCALE_FACTOR >= 1.2 ));
-    local($valign) = join('', ' VALIGN="', 
-	($NETSCAPE_HTML)? "BASELINE" : "MIDDLE", '"');
     $failed = 1; # simplifies the next call
     ($labels, $comment, $_) = &process_math_env($math_mode,$_);
-    $failed = 0 unless ($no_eqn_numbers);
+    $failed = 0;
     if ((($failed)&&($NO_SIMPLE_MATH))
 	||(/$htmlimage_rx|$htmlimage_pr_rx/)) {
 #	||((/$htmlimage_rx|$htmlimage_pr_rx/)&&($& =~/thumb/))) {
@@ -1493,23 +1492,19 @@ sub do_env_eqnarray {
 	local($sarray, $srow, $slcell, $elcell, $srcell, $ercell, $erow, $earray);
 	($sarray, $elcell, $srcell, $erow, $earray, $sempty) = ( 
 	    "\n<TABLE$env_id$lang CLASS=\"equation\""
-	    , "</TD>\n<TD ALIGN=\"CENTER\" NOWRAP>"
-	    , "</TD>\n<TD ALIGN=\"LEFT\" NOWRAP>"
+	    , "</TD>\n<TD style=\"text-align:center\">"
+	    , "</TD>\n<TD style=\"text-align:left;\">"
 	    , "</TD></TR>", "\n</TABLE>", "</TD>\n<TD>" );
 	$env_id = '';
-	$sarray .= (($no_eqn_numbers) ? ">" :  " WIDTH=\"100%\">" );
-	local($seqno) = join('',"\n<TD$eqno_class WIDTH=10 ALIGN=\""
-		, (($EQN_TAGS =~ /L/)? 'LEFT': 'RIGHT')
-		, "\">\n");
-	if ($EQN_TAGS =~ /L/) { # number on left
-	    ($srow, $slcell, $ercell) = (
-		"\n<TR$valign>" . $seqno
-		, "</TD>\n<TD NOWRAP ALIGN=", '');
-	} else { # equation number on right
-	    ($srow, $slcell, $ercell) = ("\n<TR$valign>"
-		, "<TD NOWRAP ALIGN="
-		, '</TD>'. $seqno );
-	}
+	$sarray .= (($no_eqn_numbers) ? ">" :  " >" );
+
+	# leftmost and rightmost columns expand to fill available space,
+	# so that the main group of columns is centered.
+	# one of the two contains the equation numbers.
+	($srow, $slcell, $ercell) = (
+	    "\n<TR><TD class=\"lfill\">"
+	    , "</TD><TD style=\"text-align:"
+	    , "</TD><TD class=\"rfill\">");
 
 	$_ = &protect_array_envs($_);
 
@@ -1549,7 +1544,7 @@ sub do_env_eqnarray {
 	    $return .= $slcell;
 #	    if (s/\\lefteqn$OP(\d+)$CP(.*)$OP\1$CP/ $2 /) {
 	    if (s/\\lefteqn//) {
-		$return .= "\"LEFT\" COLSPAN=\"3\">";
+		$return .= "LEFT\" COLSPAN=\"3\">";
 		s/(^\s*|$html_specials{'&'}|\s*$)//gm;
 		if (($NO_SIMPLE_MATH)||($doimage)||($failed)) {
 		    $_ = (($_)? &process_math_in_latex(
@@ -1579,19 +1574,19 @@ sub do_env_eqnarray {
 	    if (($NO_SIMPLE_MATH)||($doimage)||($failed)) {
 		$thismath = (($thismath ne '')? &process_math_in_latex(
 		    "indisplay" , '', '', $doimage.$thismath ):'');
-		$return .= join('',"\"RIGHT\">",$thismath) if ($thismath ne '');
+		$return .= join('',"RIGHT\">",$thismath) if ($thismath ne '');
 	    } elsif ($thismath ne '') { 
 		$savemath = $thismath;
 		$thismath = &simple_math_env($thismath);
 		if ($failed) {
 		    $thismath = &process_math_in_latex(
 			"indisplay",'','',$savemath);
-		    $return .= join('',"\"RIGHT\">",$thismath)
+		    $return .= join('',"RIGHT\">",$thismath)
 		} elsif ($thismath ne '') {
-		    $return .= join('',"\"RIGHT\">$sbig",$thismath,"$ebig")
+		    $return .= join('',"RIGHT\">$sbig",$thismath,"$ebig")
 		}
 	    }
-	    $return .= "\"RIGHT\">\&nbsp;" if ($thismath eq '');
+	    $return .= "RIGHT\">\&nbsp;" if ($thismath eq '');
 
 	    # center column, set using \textstyle
 	    $thismath = shift(@cols); $failed = 0;

@@ -2,19 +2,21 @@ Source: latex2html
 Section: tex
 Priority: optional
 Maintainer: Carsten Leonhardt <leo@debian.org>
-Build-Depends: debhelper-compat (= 13)
-Build-Depends-Indep: dvipng,
-                     poppler-utils,
-                     ghostscript-x,
-                     netpbm,
-                     patch,
-                     perl,
-                     perl-doc,
-                     tex-common,
-                     texlive-base-bin,
-                     texlive-latex-extra,
-                     texlive-latex-recommended
-Standards-Version: 4.6.0
+Build-Depends:
+ debhelper-compat (= 13),
+ tex-common,
+Build-Depends-Indep:
+ dvipng,
+ ghostscript,
+ netpbm,
+ patch,
+ perl,
+ perl-doc,
+ poppler-utils,
+ texlive-binaries,
+ texlive-latex-extra,
+ texlive-latex-recommended,
+Standards-Version: 4.7.0
 Rules-Requires-Root: no
 Homepage: https://www.latex2html.org/
 Vcs-Browser: https://salsa.debian.org/debian/latex2html
@@ -22,17 +24,20 @@ Vcs-Git: https://salsa.debian.org/debian/latex2html.git
 
 Package: latex2html
 Architecture: all
-Depends: ghostscript-x,
-         netpbm,
-         perl,
-         perl-doc,
-         poppler-utils,
-         texlive-base-bin,
-         texlive-fonts-recommended,
-         texlive-latex-extra,
-         texlive-latex-recommended,
-         ${misc:Depends}
-Recommends: dvipng
+Multi-Arch: foreign
+Depends:
+ ghostscript,
+ netpbm,
+ perl,
+ perl-doc,
+ poppler-utils,
+ texlive-binaries,
+ texlive-fonts-recommended,
+ texlive-latex-extra,
+ texlive-latex-recommended,
+ ${misc:Depends},
+Recommends:
+ dvipng,
 Description: LaTeX to HTML translator
  LaTeX2HTML is a conversion tool that converts documents written
  in LaTeX to HTML format. In addition, it offers an easy migration

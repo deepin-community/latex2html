@@ -4,7 +4,6 @@ Upstream-Contact: latex2html@tug.org
 Source: https://github.com/latex2html/latex2html
 Files-Excluded:
  	cweb2html
- 	docs/changebar*
 
 Files: *
 Copyright: 1993-1997 Nikos Drakos <nikos@cbl.leeds.ac.uk>
@@ -32,7 +31,7 @@ Copyright: 1997 Herbert Xu <herbert@debian.org>
            2001 Chanop Silpa-Anan <chanop@debian.org>
            2002-2003 Aurélien Beaujean <aure@debian.org>
            2003-2013 Roland Stigge <stigge@antcom.de>
-           2018-2020 Carsten Leonhardt <leo@debian.org>
+           2018-2024 Carsten Leonhardt <leo@debian.org>
 License: GPL-2+
  On Debian systems, the full text of the GNU General Public
  License version 2 can be found in the file

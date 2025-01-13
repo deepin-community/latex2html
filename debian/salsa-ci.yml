@@ -1,11 +1,23 @@
 include:
- - https://salsa.debian.org/salsa-ci-team/pipeline/raw/master/salsa-ci.yml
- - https://salsa.debian.org/salsa-ci-team/pipeline/raw/master/pipeline-jobs.yml
+  - https://salsa.debian.org/salsa-ci-team/pipeline/raw/master/recipes/debian.yml
 
 # not reproducible because of netpbm bug https://bugs.debian.org/827115
 reprotest:
   allow_failure: true
 
+wrap-and-sort:
+  allow_failure: true
+
 variables:
   RELEASE: 'unstable'
   SALSA_CI_REPROTEST_ENABLE_DIFFOSCOPE: 1
+  # enable build testing on more architectures
+  # SALSA_CI_DISABLE_BUILD_PACKAGE_ARM64: 0
+  # SALSA_CI_DISABLE_BUILD_PACKAGE_ARMEL: 0
+  # SALSA_CI_DISABLE_BUILD_PACKAGE_ARMHF: 0
+  # SALSA_CI_DISABLE_BUILD_PACKAGE_RISCV64: 0
+  # enable wrap-and-sort test
+  SALSA_CI_DISABLE_WRAP_AND_SORT: 0
+  SALSA_CI_WRAP_AND_SORT_ARGS: '-stab'
+  # enable building twice in a row
+  SALSA_CI_DISABLE_BUILD_PACKAGE_TWICE: 0
